@@ -170,7 +170,7 @@ input[type=range]{width:100%;accent-color:var(--ui)}
 /* 기존 디저트 위 장식(topper)은 사용하지 않음 */
 .dessert .topper{display:none!important}
 .oocbox{min-height:150px;line-height:1.55;background:#fdfbfc}.copyrow{display:flex;gap:8px;align-items:center}.copyrow .btn{flex:1}.charcount{min-width:64px;text-align:right;color:var(--muted);font-size:11px;font-weight:800}
-.result{display:grid;grid-template-columns:1.15fr .85fr;gap:13px}.menu,.info{background:var(--paper);border-radius:19px;padding:16px;border:1px solid #5a364510}.menu small{font-size:9px;letter-spacing:.18em;color:var(--accent);font-weight:900}.menu h3{margin:7px 0 6px;font-size:23px}.menu p{margin:0;color:#765f69;font-size:13px;line-height:1.6}.price{display:inline-flex;margin-top:10px;padding:7px 10px;border-radius:999px;background:#ffffffb3;font-size:11px;color:var(--accent);font-weight:900}.info{display:grid;gap:10px}.fl{display:grid;grid-template-columns:12px 1fr;gap:8px}.fl i{width:12px;height:12px;border-radius:50%;margin-top:4px}.fl strong{display:block;font-size:11px}.fl span{display:block;font-size:11px;color:#806b74;margin-top:2px;line-height:1.4}.foot{text-align:center;margin-top:12px;font-size:10px;color:#8b747e}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#34272d;color:#fff;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;transition:.2s;z-index:99}.toast.show{opacity:1;transform:translate(-50%,0)}body.exporting .card{box-shadow:none}@media(max-width:960px){.layout{grid-template-columns:1fr}.editor{max-height:none}.previewWrap{min-height:680px}}@media(max-width:600px){.top{align-items:flex-start;padding:12px}.brand p{display:none}.brand h1{font-size:18px}.actions{flex-direction:column}.editor{padding:9px}.two{grid-template-columns:1fr}.stage{padding:9px}.card{transform-origin:top left}.result{grid-template-columns:1fr}}
+.result{display:grid;grid-template-columns:1.15fr .85fr;gap:13px}.menu,.info{background:var(--paper);border-radius:19px;padding:16px;border:1px solid #5a364510}.menu small{font-size:9px;letter-spacing:.18em;color:var(--accent);font-weight:900}.menu h3{margin:7px 0 6px;font-size:23px}.menu p{margin:0;color:#765f69;font-size:13px;line-height:1.6}.price{display:inline-flex;margin-top:10px;padding:7px 10px;border-radius:999px;background:#ffffffb3;font-size:11px;color:var(--accent);font-weight:900}.info{display:grid;gap:10px}.fl{display:grid;grid-template-columns:12px 1fr;gap:8px}.fl i{width:12px;height:12px;border-radius:50%;margin-top:4px}.fl strong{display:block;font-size:11px}.fl span{display:block;font-size:11px;color:#806b74;margin-top:2px;line-height:1.4}.foot{text-align:center;margin-top:12px;font-size:10px;color:#8b747e}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#34272d;color:#fff;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;transition:.2s;z-index:99}.toast.show{opacity:1;transform:translate(-50%,0)}body.exporting .card{box-shadow:none}@media(max-width:960px){.layout{grid-template-columns:1fr}.editor{max-height:none}.previewWrap{min-height:680px}}@media(max-width:600px){.three{grid-template-columns:1fr}.top{align-items:flex-start;padding:12px}.brand p{display:none}.brand h1{font-size:18px}.actions{flex-direction:column}.editor{padding:9px}.two{grid-template-columns:1fr}.stage{padding:9px}.card{transform-origin:top left}.result{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -183,12 +183,15 @@ input[type=range]{width:100%;accent-color:var(--ui)}
 <div class="two"><div class="lockrow"><label>A의 맛<select id="flavorA"></select></label><button id="lockA" class="lock" type="button">🔓</button></div><div class="lockrow"><label>B의 맛<select id="flavorB"></select></label><button id="lockB" class="lock" type="button">🔓</button></div></div>
 <div class="lockrow"><label>둘의 분위기<select id="mood"></select></label><button id="lockMood" class="lock" type="button">🔓</button></div>
 <div class="two"><div class="lockrow"><label>토핑<select id="topping"></select></label><button id="lockTop" class="lock" type="button">🔓</button></div><div class="lockrow"><label>장식<select id="decor"></select></label><button id="lockDecor" class="lock" type="button">🔓</button></div></div>
-<div class="two">
+<div class="three">
   <div>
     <div class="rangeRow"><label>토핑 개수<input id="toppingCount" type="range" min="1" max="9" step="1" value="4"></label><span id="toppingCountValue" class="rangeValue">4개</span></div>
   </div>
   <div>
-    <div class="rangeRow"><label>토핑 간격<input id="toppingGap" type="range" min="10" max="34" step="1" value="22"></label><span id="toppingGapValue" class="rangeValue">22</span></div>
+    <div class="rangeRow"><label>토핑 간격<input id="toppingGap" type="range" min="16" max="52" step="1" value="32"></label><span id="toppingGapValue" class="rangeValue">32</span></div>
+  </div>
+  <div>
+    <div class="rangeRow"><label>토핑 크기<input id="toppingSize" type="range" min="70" max="150" step="5" value="100"></label><span id="toppingSizeValue" class="rangeValue">100%</span></div>
   </div>
 </div>
 <label>가격 표시<select id="price"><option value="PRICE : KISS ♡">PRICE : KISS ♡</option><option value="₩ LOVE">₩ LOVE</option><option value="♡ 99">♡ 99</option><option value="FOR US ONLY">FOR US ONLY</option></select></label>
@@ -250,7 +253,8 @@ function renderTopping(){
   const t=get(toppings,$('#topping').value),layer=$('#toppingLayer');
   if(!layer)return;
   const count=Math.max(1,Math.min(9,Number($('#toppingCount').value)||4));
-  const gap=Math.max(10,Math.min(34,Number($('#toppingGap').value)||22));
+  const gap=Math.max(16,Math.min(52,Number($('#toppingGap').value)||32));
+  const size=Math.max(70,Math.min(150,Number($('#toppingSize').value)||100));
   const anchor=toppingAnchor($('#type').value);
   layer.className='topping-layer '+t.id;
   layer.innerHTML='';
@@ -260,14 +264,15 @@ function renderTopping(){
     span.setAttribute('aria-hidden','true');
     const offset=i-(count-1)/2;
     const x=anchor.x + offset*gap - 12;
-    const y=anchor.y + Math.abs(offset)*2.2 - 12;
+    const y=anchor.y + Math.abs(offset)*2.2 + ((i%2===0)?-3:3) - 12;
     span.style.left=x+'px';
     span.style.top=y+'px';
-    span.style.transform=`rotate(${(-14 + (i%5)*7)}deg)`;
+    span.style.transform=`rotate(${(-14 + (i%5)*7)}deg) scale(${size/100})`;
     layer.appendChild(span);
   }
   $('#toppingCountValue').textContent=count+'개';
   $('#toppingGapValue').textContent=String(gap);
+  $('#toppingSizeValue').textContent=size+'%';
 }
 function renderDecor(){
   const d=get(decors,$('#decor').value),box=$('#sceneDecor');
@@ -341,7 +346,7 @@ function applyFont(){const m={default:'Arial,"Apple SD Gothic Neo","Malgun Gothi
 function fit(){const c=$('#card'),s=$('.stage');if(innerWidth>600){c.style.transform='';c.style.marginBottom='';return}const sc=Math.min(1,(s.clientWidth-4)/760);c.style.transform=`scale(${sc})`;c.style.marginBottom=`-${c.offsetHeight*(1-sc)}px`}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1800)}
 async function save(){if(typeof html2canvas!=='function'){toast('PNG 저장 모듈을 불러오지 못했어요.');return}const c=$('#card'),b=$('#save'),ot=c.style.transform,om=c.style.marginBottom,txt=b.textContent;b.disabled=true;b.textContent='PNG 만드는 중…';c.style.transform='none';c.style.marginBottom='0';document.body.classList.add('exporting');try{await document.fonts.ready;const w=Number($('#exportWidth').value||1080),canvas=await html2canvas(c,{scale:w/c.offsetWidth,useCORS:true,backgroundColor:null,logging:false}),blob=await new Promise((ok,no)=>canvas.toBlob(x=>x?ok(x):no(new Error('blob')),'image/png')),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`${($('#nameA').value||'A')}-${($('#nameB').value||'B')}-sweet-as-us.png`.replace(/[\\/:*?"<>|]/g,'_');document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000);toast('PNG로 저장했어요 ♡')}catch(e){console.error(e);toast('PNG 저장에 실패했어요.')}finally{document.body.classList.remove('exporting');c.style.transform=ot;c.style.marginBottom=om;b.disabled=false;b.textContent=txt;setTimeout(fit,0)}}
-['nameA','nameB','colorA','colorB','type','flavorA','flavorB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap'].forEach(id=>$('#'+id).addEventListener('input',update));
+['nameA','nameB','colorA','colorB','type','flavorA','flavorB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap','toppingSize'].forEach(id=>$('#'+id).addEventListener('input',update));
 ['patternSize','patternGap'].forEach(id=>$('#'+id).addEventListener('input',()=>setPattern(pattern)));$('#randomAll').onclick=()=>randomize(true);$('#reroll').onclick=()=>randomize(false);$('#save').onclick=save;$('#fit').onclick=fit;$('#themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});$('#patterns').addEventListener('click',e=>{const b=e.target.closest('[data-pattern]');if(b)setPattern(b.dataset.pattern)});$('#font').onchange=applyFont;$('#fontFile').onchange=e=>loadFont(e.target.files?.[0]);$('#copyOoc').onclick=copyOoc;addEventListener('resize',fit);$('#menuName').value='Snowberry Pair Cake';$('#menuDesc').value='바닐라 밀크와 딸기 크림을 함께 담고 베리 믹스를 얹었습니다. 서로 다른 온도가 만나 하나의 부드러운 조합이 되었습니다.';setTheme('milk');setPattern('none');update();setTimeout(fit,30);
 </script>
 </body></html>
