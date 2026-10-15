@@ -32,8 +32,8 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   left:68px;bottom:43px;width:194px;height:134px;border-radius:18px 18px 24px 24px;
   background:
     linear-gradient(to bottom,#fff9fc 0 12%,var(--flA) 12% 39%,#fff8fb 39% 47%,var(--flB) 47% 74%,#fff8fb 74% 82%,var(--flA) 82% 100%);
-  border:3px solid rgba(255,255,255,.86);
-  box-shadow:inset -8px 0 0 rgba(124,84,101,.06), 0 8px 16px rgba(80,52,65,.10);
+  border:none;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.96), inset -8px 0 0 rgba(124,84,101,.06), 0 8px 16px rgba(80,52,65,.10);
 }
 .cake .base:before{
   content:"";position:absolute;left:10px;right:10px;top:8px;height:18px;border-radius:999px;
@@ -48,7 +48,7 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   left:70px;bottom:166px;width:190px;height:36px;
   border-radius:52% 52% 42% 42% / 70% 70% 36% 36%;
   background:linear-gradient(to bottom,#ffffff 0 36%,#fff8fb 37% 72%,#f2e5ec 100%);
-  box-shadow:0 5px 10px rgba(90,59,73,.08);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.94), 0 5px 10px rgba(90,59,73,.08);
   z-index:2;
 }
 .cake .cream:before{display:none;}
@@ -850,6 +850,7 @@ async function save(){
       allowTaint:false,
       backgroundColor:null,
       logging:false,
+      foreignObjectRendering:true,
       onclone:clonedDoc=>{
         // 업로드 폰트의 data URL @font-face가 clone에도 반드시 존재하게 함
         const sourceStyle=document.getElementById('userDessertFontStyle');
