@@ -188,7 +188,7 @@ input[type=range]{width:100%;accent-color:var(--ui)}
     <div class="rangeRow"><label>토핑 개수<input id="toppingCount" type="range" min="1" max="9" step="1" value="4"></label><span id="toppingCountValue" class="rangeValue">4개</span></div>
   </div>
   <div>
-    <div class="rangeRow"><label>토핑 간격<input id="toppingGap" type="range" min="16" max="52" step="1" value="32"></label><span id="toppingGapValue" class="rangeValue">32</span></div>
+    <div class="rangeRow"><label>토핑 간격<input id="toppingGap" type="range" min="20" max="64" step="1" value="40"></label><span id="toppingGapValue" class="rangeValue">40</span></div>
   </div>
   <div>
     <div class="rangeRow"><label>토핑 크기<input id="toppingSize" type="range" min="70" max="150" step="5" value="100"></label><span id="toppingSizeValue" class="rangeValue">100%</span></div>
@@ -253,7 +253,7 @@ function renderTopping(){
   const t=get(toppings,$('#topping').value),layer=$('#toppingLayer');
   if(!layer)return;
   const count=Math.max(1,Math.min(9,Number($('#toppingCount').value)||4));
-  const gap=Math.max(16,Math.min(52,Number($('#toppingGap').value)||32));
+  const gap=Math.max(20,Math.min(64,Number($('#toppingGap').value)||40));
   const size=Math.max(70,Math.min(150,Number($('#toppingSize').value)||100));
   const anchor=toppingAnchor($('#type').value);
   layer.className='topping-layer '+t.id;
