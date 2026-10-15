@@ -43,20 +43,27 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   background-size:18px 12px;opacity:.92;
 }
 .cake .cream{
-  left:58px;bottom:160px;width:214px;height:48px;border-radius:50%;
-  background:radial-gradient(circle at 50% 35%,#ffffff 0 35%,#fff7fb 36% 70%,#f4e9ef 100%);
-  box-shadow:0 4px 10px rgba(90,59,73,.08);
+  left:70px;bottom:166px;width:190px;height:36px;
+  border-radius:52% 52% 42% 42% / 70% 70% 36% 36%;
+  background:linear-gradient(to bottom,#ffffff 0 36%,#fff8fb 37% 72%,#f2e5ec 100%);
+  box-shadow:0 5px 10px rgba(90,59,73,.08);
+  z-index:2;
 }
 .cake .cream:before{
-  content:"";position:absolute;left:18px;right:18px;top:22px;height:20px;
-  background:radial-gradient(circle at 10px 0,#fff9fc 0 11px,transparent 11.5px) repeat-x;
-  background-size:22px 20px;
+  content:"";position:absolute;left:14px;right:14px;bottom:-8px;height:12px;
+  background:radial-gradient(circle at 6px 0,#fff9fc 0 6px,transparent 6.5px) repeat-x;
+  background-size:14px 12px;opacity:.96;
+}
+.cake .cream:after{
+  content:"";position:absolute;left:26px;right:26px;top:7px;height:9px;border-radius:999px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.72),rgba(255,255,255,0));
 }
 .cake .fruit{
-  left:145px;bottom:187px;width:31px;height:35px;border-radius:50% 50% 45% 45%;
+  left:145px;bottom:183px;width:30px;height:34px;border-radius:50% 50% 45% 45%;
   background:radial-gradient(circle at 36% 28%,#ffd5df 0 12%,var(--charB) 13% 62%,#b84e71 100%);
   box-shadow:0 3px 4px rgba(100,58,72,.12);
-  transform:rotate(6deg);
+  transform:rotate(4deg);
+  z-index:3;
 }
 .cake .fruit:before{
   content:"";position:absolute;left:8px;top:-6px;width:15px;height:8px;
@@ -437,7 +444,7 @@ function fill(el,data){el.innerHTML=data.map(x=>`<option value="${x.id}">${x.nam
 const get=(a,id)=>a.find(x=>x.id===id)||a[0],rnd=a=>a[Math.floor(Math.random()*a.length)];
 function toppingAnchor(type){
   return {
-    cake:{x:165,y:74},
+    cake:{x:165,y:78},
     parfait:{x:165,y:49},
     macaron:{x:165,y:63},
     sundae:{x:165,y:58},
