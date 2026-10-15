@@ -848,9 +848,8 @@ async function save(){
       scrollY:-window.scrollY,
       useCORS:true,
       allowTaint:false,
-      backgroundColor:null,
+      backgroundColor:getComputedStyle(c).backgroundColor||'#ffffff',
       logging:false,
-      foreignObjectRendering:true,
       onclone:clonedDoc=>{
         // 업로드 폰트의 data URL @font-face가 clone에도 반드시 존재하게 함
         const sourceStyle=document.getElementById('userDessertFontStyle');
@@ -872,6 +871,9 @@ async function save(){
       }
     });
 
+    if(!canvas.width||!canvas.height){
+      throw new Error('empty canvas');
+    }
     const blob=await new Promise((ok,no)=>
       canvas.toBlob(x=>x?ok(x):no(new Error('blob')),'image/png')
     );
