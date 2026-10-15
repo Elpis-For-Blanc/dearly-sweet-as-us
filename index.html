@@ -14,18 +14,23 @@ html,body{margin:0;min-height:100%;background:#f6f2f4;color:var(--ink);font-fami
 .rangeRow label{margin:0}
 .rangeValue{min-width:54px;text-align:center;padding:7px 8px;border-radius:999px;background:#faf5f7;border:1px solid var(--line);font-size:11px;font-weight:900;color:#745d67}
 input[type=range]{width:100%;accent-color:var(--ui)}
-.previewWrap{min-width:0;display:flex;flex-direction:column}.bar{height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 15px;background:#faf8f9;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:800}.stage{flex:1;overflow:auto;padding:28px;background:#f4f0f2}.card{--flA:#f3e4c7;--flB:#f4a7bd;--charA:#b7d8ef;--charB:#f4a7c1;--pattern:none;--pattern-tile:32px;width:760px;height:auto;min-height:0;margin:0 auto;padding:36px;position:relative;overflow:hidden;border-radius:30px;background:var(--bg);color:var(--text);font-family:var(--font);box-shadow:0 18px 48px #4d2f3d24}.card:before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:var(--pattern-tile) var(--pattern-tile);opacity:.13;pointer-events:none}.inner{position:relative;z-index:1}.head{text-align:center;margin-bottom:20px}.head small{font-size:10px;letter-spacing:.2em;color:var(--accent);font-weight:900}.head h2{margin:7px 0 4px;font-size:36px;line-height:1.15}.head p{margin:0;color:#806b74;font-size:13px}.names{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:7px;background:#ffffffba;border:1px solid #ffffffd8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.dot{width:11px;height:11px;border-radius:50%}.scene{position:relative;min-height:330px;background:var(--paper);border-radius:24px;display:grid;place-items:center;overflow:hidden;margin-bottom:14px;border:1px solid #5a364510}.dessert{position:relative;z-index:5;width:330px;height:280px;filter:drop-shadow(0 16px 16px rgba(78,53,64,.12))}.dessert div{position:absolute}
+.previewWrap{min-width:0;display:flex;flex-direction:column}.bar{height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 15px;background:#faf8f9;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:800}.stage{flex:1;overflow:auto;padding:28px;background:#f4f0f2}.card{--flA:#f3e4c7;--flB:#f4a7bd;--charA:#b7d8ef;--charB:#f4a7c1;--pattern:none;--pattern-tile:32px;width:760px;height:auto;min-height:0;margin:0 auto;padding:36px;position:relative;overflow:hidden;border-radius:30px;background:var(--bg);color:var(--text);font-family:var(--font);box-shadow:0 18px 48px #4d2f3d24}.card:before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:var(--pattern-tile) var(--pattern-tile);opacity:.13;pointer-events:none}.inner{position:relative;z-index:1}.head{text-align:center;margin-bottom:20px}.head small{font-size:10px;letter-spacing:.2em;color:var(--accent);font-weight:900}.head h2{margin:7px 0 4px;font-size:36px;line-height:1.15}.head p{margin:0;color:#806b74;font-size:13px}.names{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:7px;background:#ffffffba;border:1px solid #ffffffd8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.dot{width:11px;height:11px;border-radius:50%}.scene{position:relative;min-height:330px;background:var(--paper);border-radius:24px;display:grid;place-items:center;overflow:hidden;margin-bottom:14px;border:1px solid #5a364510}.dessert{position:relative;z-index:5;width:330px;height:280px}.dessert div{position:absolute}
 .plate{
   left:50%;bottom:16px;transform:translateX(-50%);
   width:286px;height:38px;border-radius:50%;
-  background:radial-gradient(ellipse at center,#ffffff 0 46%,#f4edf1 47% 72%,#eadfe5 73% 100%);
+  background:
+    radial-gradient(ellipse at 50% 38%,#ffffff 0 41%,#f8f2f5 42% 58%,#eadde4 59% 77%,#d8c6cf 78% 100%);
   border:3px solid #fff;
-  box-shadow:0 10px 16px rgba(79,56,68,.16), inset 0 2px 0 rgba(255,255,255,.98);
+  box-shadow:0 9px 0 rgba(88,58,72,.035),0 13px 18px rgba(79,56,68,.13);
 }
 .plate:before{
-  content:"";position:absolute;inset:6px 24px 8px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.96);
-  opacity:.96;
+  content:"";position:absolute;left:28px;right:28px;top:7px;height:18px;border-radius:50%;
+  border:2px solid #fff;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.78) 0 48%,rgba(235,221,228,.55) 49% 70%,transparent 71%);
+}
+.plate:after{
+  content:"";position:absolute;left:54px;right:54px;bottom:5px;height:7px;border-radius:50%;
+  background:rgba(112,78,92,.08);
 }
 
 .cake .base{
@@ -33,7 +38,9 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   background:
     linear-gradient(to bottom,#fff9fc 0 12%,var(--flA) 12% 39%,#fff8fb 39% 47%,var(--flB) 47% 74%,#fff8fb 74% 82%,var(--flA) 82% 100%);
   border:4px solid #fff;
-  box-shadow:inset -8px 0 0 rgba(124,84,101,.07), 0 8px 16px rgba(80,52,65,.12);
+  outline:1px solid rgba(211,190,200,.48);
+  outline-offset:-5px;
+  box-shadow:inset -8px 0 0 rgba(124,84,101,.07), 0 8px 16px rgba(80,52,65,.10);
 }
 .cake .base:before{
   content:"";position:absolute;left:10px;right:10px;top:8px;height:18px;border-radius:999px;
@@ -47,9 +54,11 @@ input[type=range]{width:100%;accent-color:var(--ui)}
 .cake .cream{
   left:70px;bottom:166px;width:190px;height:36px;
   border-radius:52% 52% 42% 42% / 70% 70% 36% 36%;
-  background:linear-gradient(to bottom,#ffffff 0 36%,#fff8fb 37% 72%,#f2e5ec 100%);
+  background:linear-gradient(to bottom,#ffffff 0 34%,#fff9fc 35% 68%,#eadce4 100%);
   border:3px solid #fff;
-  box-shadow:0 5px 10px rgba(90,59,73,.10);
+  outline:1px solid rgba(218,196,207,.42);
+  outline-offset:-4px;
+  box-shadow:0 5px 9px rgba(90,59,73,.09);
   z-index:2;
 }
 .cake .cream:before{display:none;}
@@ -837,7 +846,7 @@ async function save(){
     const captureWidth=Math.ceil(rect.width);
     const captureHeight=Math.ceil(c.scrollHeight);
     const targetWidth=Number($('#exportWidth').value||1080);
-    const scale=targetWidth/captureWidth;
+    const scale=Math.max(1,targetWidth/captureWidth);
 
     const canvas=await html2canvas(c,{
       scale,
@@ -850,8 +859,6 @@ async function save(){
       useCORS:true,
       allowTaint:false,
       backgroundColor:getComputedStyle(c).backgroundColor||'#ffffff',
-      foreignObjectRendering:true,
-      removeContainer:true,
       logging:false,
       onclone:clonedDoc=>{
         // 프리뷰의 실제 CSS를 그대로 사용한다. export 전용 케이크 보정은 넣지 않는다.
