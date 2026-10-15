@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7dce7">
-<title>DEARLY — 둘의 디저트</title>
+<title>DEARLY — 우리를 담은 디저트</title>
 <style>
 *{box-sizing:border-box} :root{--ui:#d96f9e;--line:#eadde3;--muted:#8e7b84;--ink:#4f3a44;--bg:#f7dce7;--paper:#fffafd;--accent:#d96f9e;--text:#573f49;--font:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
 html,body{margin:0;min-height:100%;background:#f6f2f4;color:var(--ink);font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px 18px;background:#fffffff2;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.brand small{display:block;color:var(--ui);font-size:10px;font-weight:900;letter-spacing:.2em}.brand h1{margin:2px 0 0;font-size:21px}.brand p{margin:4px 0 0;color:var(--muted);font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:10px 13px;font-weight:800;min-height:42px}.btn.primary{background:var(--ui);border-color:var(--ui);color:#fff}.btn.small{padding:7px 10px;min-height:36px;font-size:12px}.layout{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);min-height:calc(100vh - 76px)}.editor{padding:15px;overflow:auto;max-height:calc(100vh - 76px)}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:12px}.ph{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.ph h2{margin:0;font-size:14px}.ph span,.hint{color:var(--muted);font-size:11px}label{display:grid;gap:6px;margin-bottom:10px;font-size:12px;font-weight:800;color:#6a5660}input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);font-size:16px}input[type=color]{width:100%;height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.person{padding:11px;border:1px solid var(--line);border-radius:12px;background:#fefcfd}.tag{font-size:11px;font-weight:900;color:var(--ui);margin-bottom:8px}.lockrow{display:flex;align-items:end;gap:7px}.lockrow label{flex:1}.lock{width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:#fff}.lock.on{background:#fff1f7;border-color:#d98bab}.themeGrid,.patternGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.choice{border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px;text-align:left;font-size:11px;font-weight:800}.choice.active{border-color:#d98bab;background:#fff4f8}
@@ -13,15 +13,132 @@ html,body{margin:0;min-height:100%;background:#f6f2f4;color:var(--ink);font-fami
 .rangeValue{min-width:54px;text-align:center;padding:7px 8px;border-radius:999px;background:#faf5f7;border:1px solid var(--line);font-size:11px;font-weight:900;color:#745d67}
 input[type=range]{width:100%;accent-color:var(--ui)}
 .previewWrap{min-width:0;display:flex;flex-direction:column}.bar{height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 15px;background:#faf8f9;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-weight:800}.stage{flex:1;overflow:auto;padding:28px;background:#f4f0f2}.card{--flA:#f3e4c7;--flB:#f4a7bd;--charA:#b7d8ef;--charB:#f4a7c1;--pattern:none;--pattern-tile:32px;width:760px;margin:0 auto;padding:36px;position:relative;overflow:hidden;border-radius:30px;background:var(--bg);color:var(--text);font-family:var(--font);box-shadow:0 18px 48px #4d2f3d24}.card:before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:var(--pattern-tile) var(--pattern-tile);opacity:.13;pointer-events:none}.inner{position:relative;z-index:1}.head{text-align:center;margin-bottom:20px}.head small{font-size:10px;letter-spacing:.2em;color:var(--accent);font-weight:900}.head h2{margin:7px 0 4px;font-size:36px;line-height:1.15}.head p{margin:0;color:#806b74;font-size:13px}.names{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:7px;background:#ffffffba;border:1px solid #ffffffd8;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.dot{width:11px;height:11px;border-radius:50%}.scene{position:relative;min-height:330px;background:var(--paper);border-radius:24px;display:grid;place-items:center;overflow:hidden;margin-bottom:14px;border:1px solid #5a364510}.dessert{position:relative;z-index:5;width:330px;height:280px;filter:drop-shadow(0 14px 12px #4e35401f)}.dessert div{position:absolute}.plate{left:50%;bottom:18px;transform:translateX(-50%);width:265px;height:32px;border-radius:50%;background:#f1ecef;border:3px solid #fff}.cake .base{left:70px;bottom:43px;width:190px;height:132px;border-radius:16px 16px 22px 22px;background:linear-gradient(#fff8fb 0 12%,var(--flA) 12% 42%,#fff8fb 42% 50%,var(--flB) 50% 80%,#fff8fb 80% 88%,var(--flA) 88%)}.cake .cream{left:62px;bottom:158px;width:205px;height:42px;border-radius:50%;background:#fff8fb}.cake .fruit{left:145px;bottom:190px;width:32px;height:32px;border-radius:50%;background:var(--charB)}.cake .topper{left:211px;bottom:161px;font-size:27px;color:var(--charA);z-index:9}.parfait .glass{left:103px;bottom:37px;width:124px;height:173px;border-radius:20px 20px 55px 55px;background:#ffffff7a;border:4px solid #fff}.parfait .l1{left:116px;bottom:55px;width:98px;height:45px;background:var(--flA);border-radius:0 0 42px 42px}.parfait .l2{left:116px;bottom:99px;width:98px;height:45px;background:var(--flB)}.parfait .cream{left:111px;bottom:176px;width:108px;height:76px;background:#fff8fb;border-radius:50%}.parfait .fruit{left:147px;bottom:227px;width:28px;height:28px;border-radius:50%;background:var(--charB)}.parfait .topper{left:197px;bottom:199px;font-size:26px;color:var(--charA);z-index:9}.macaron .m1,.macaron .m2,.macaron .m3{left:105px;width:120px;height:57px;border-radius:50px}.macaron .m1{bottom:58px;background:var(--flA)}.macaron .m2{bottom:118px;background:var(--flB)}.macaron .m3{bottom:178px;background:var(--charB)}.macaron .m1:after,.macaron .m2:after,.macaron .m3:after{content:"";position:absolute;left:9px;right:9px;top:24px;height:8px;border-radius:99px;background:#fff8fb}.macaron .topper{left:207px;bottom:174px;font-size:27px;color:var(--charA);z-index:9}.sundae .cup{left:101px;bottom:42px;width:128px;height:110px;border-radius:20px 20px 55px 55px;background:#f4eef1;border:4px solid #fff}.sundae .s1,.sundae .s2,.sundae .s3{width:78px;height:78px;border-radius:50%}.sundae .s1{left:90px;bottom:132px;background:var(--flA)}.sundae .s2{left:156px;bottom:132px;background:var(--flB)}.sundae .s3{left:123px;bottom:183px;background:#fff8fb}.sundae .fruit{left:151px;bottom:245px;width:26px;height:26px;border-radius:50%;background:var(--charB)}.sundae .topper{left:202px;bottom:174px;font-size:26px;color:var(--charA);z-index:9}.crepe .wrap{left:91px;bottom:44px;width:150px;height:200px;background:#efcf92;clip-path:polygon(5% 0,95% 0,65% 100%,35% 100%);border-radius:18px}.crepe .cream{left:103px;bottom:181px;width:126px;height:74px;background:#fff8fb;border-radius:50%}.crepe .f1,.crepe .f2,.crepe .f3{width:38px;height:38px;border-radius:50%}.crepe .f1{left:114px;bottom:208px;background:var(--flA)}.crepe .f2{left:148px;bottom:220px;background:var(--flB)}.crepe .f3{left:182px;bottom:206px;background:var(--charB)}.crepe .topper{left:205px;bottom:176px;font-size:26px;color:var(--charA);z-index:9}
-.topping-layer{inset:0;z-index:8;pointer-events:none}.topping-layer span{position:absolute!important;display:grid;place-items:center;width:24px;height:24px;font-size:19px;line-height:1;filter:drop-shadow(0 1px 1px #6d4f5b1c)}
-/* 토핑은 디저트의 실제 윗면 가까이에 놓이도록 종류별로 배치 */
-.cake .topping-layer span:nth-child(1){left:112px;top:78px;transform:rotate(-12deg)}.cake .topping-layer span:nth-child(2){left:145px;top:66px;transform:rotate(8deg)}.cake .topping-layer span:nth-child(3){left:179px;top:79px;transform:rotate(16deg)}.cake .topping-layer span:nth-child(4){left:150px;top:94px;transform:rotate(-5deg)}
-.parfait .topping-layer span:nth-child(1){left:119px;top:46px;transform:rotate(-12deg)}.parfait .topping-layer span:nth-child(2){left:146px;top:30px;transform:rotate(8deg)}.parfait .topping-layer span:nth-child(3){left:177px;top:44px;transform:rotate(16deg)}.parfait .topping-layer span:nth-child(4){left:151px;top:62px;transform:rotate(-5deg)}
-.macaron .topping-layer span:nth-child(1){left:120px;top:59px;transform:rotate(-12deg)}.macaron .topping-layer span:nth-child(2){left:148px;top:49px;transform:rotate(8deg)}.macaron .topping-layer span:nth-child(3){left:178px;top:61px;transform:rotate(16deg)}.macaron .topping-layer span:nth-child(4){left:151px;top:80px;transform:rotate(-5deg)}
-.sundae .topping-layer span:nth-child(1){left:111px;top:61px;transform:rotate(-12deg)}.sundae .topping-layer span:nth-child(2){left:145px;top:38px;transform:rotate(8deg)}.sundae .topping-layer span:nth-child(3){left:181px;top:61px;transform:rotate(16deg)}.sundae .topping-layer span:nth-child(4){left:149px;top:80px;transform:rotate(-5deg)}
-.crepe .topping-layer span:nth-child(1){left:114px;top:49px;transform:rotate(-12deg)}.crepe .topping-layer span:nth-child(2){left:145px;top:34px;transform:rotate(8deg)}.crepe .topping-layer span:nth-child(3){left:178px;top:48px;transform:rotate(16deg)}.crepe .topping-layer span:nth-child(4){left:151px;top:66px;transform:rotate(-5deg)}
-.topping-layer.berry span{font-size:0;width:21px;height:21px;border-radius:50%;background:#d75d79;box-shadow:inset -2px -2px #b94665}.topping-layer.berry span:after{content:"";width:8px;height:5px;border-radius:100% 0;background:#76956d;position:absolute;top:-3px;left:8px;transform:rotate(-20deg)}.topping-layer.ribbon span{color:var(--charB)}.topping-layer.star span{color:#e5bb4f}.topping-layer.rose span{color:#d9789a}.topping-layer.pearl span{color:#fff;text-shadow:0 0 0 #cdbfc5,0 1px 3px #8d76814d}.topping-layer.cookie span{color:#b88455}.topping-layer.jelly span{color:#e97798}.topping-layer.snow span{color:#fff;text-shadow:0 1px 4px #a7a0a5}.topping-layer.candy span{color:var(--charA)}.topping-layer.choco span{color:#7c5547}.topping-layer.mintchip span{color:#5f9f8a}
-/* 장식도 장면 바깥이 아니라 디저트 자체에 붙여 보이게 배치 */
+
+.topping-layer{position:absolute;inset:0;z-index:8;pointer-events:none}
+.topping-layer .top-piece{
+  position:absolute!important;
+  width:24px;height:24px;display:block;
+  transform-origin:center center;
+  filter:drop-shadow(0 2px 2px rgba(72,46,58,.16));
+}
+
+/* 베리 믹스 */
+.topping-layer.berry .top-piece{
+  width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 31% 27%,#ffdce5 0 12%,#e76f8d 13% 57%,#ba405f 100%);
+}
+.topping-layer.berry .top-piece:nth-child(3n+2){
+  background:radial-gradient(circle at 31% 27%,#eee6ff 0 12%,#9b87c9 13% 57%,#6f599d 100%);
+}
+.topping-layer.berry .top-piece:nth-child(3n){
+  background:radial-gradient(circle at 31% 27%,#ffe1dd 0 12%,#dc626e 13% 57%,#aa3d4b 100%);
+}
+.topping-layer.berry .top-piece:after{
+  content:"";position:absolute;width:9px;height:6px;left:7px;top:-4px;
+  border-radius:100% 0 100% 0;background:#789a70;transform:rotate(-25deg)
+}
+
+/* 리본 초콜릿 */
+.topping-layer.ribbon .top-piece{
+  width:26px;height:20px;
+  background:
+    radial-gradient(ellipse at 27% 48%,#ca8796 0 34%,transparent 36%),
+    radial-gradient(ellipse at 73% 48%,#b86c7d 0 34%,transparent 36%);
+}
+.topping-layer.ribbon .top-piece:before{
+  content:"";position:absolute;left:9px;top:5px;width:8px;height:8px;border-radius:3px;
+  background:#8c4e5e;box-shadow:inset 0 1px rgba(255,255,255,.28)
+}
+.topping-layer.ribbon .top-piece:after{
+  content:"";position:absolute;left:8px;top:11px;width:10px;height:8px;
+  background:
+    linear-gradient(135deg,#aa6173 0 48%,transparent 50%),
+    linear-gradient(225deg,#aa6173 0 48%,transparent 50%)
+}
+
+/* 별사탕 */
+.topping-layer.star .top-piece{
+  width:23px;height:23px;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 94%,50% 72%,21% 94%,32% 57%,2% 35%,39% 35%);
+  background:linear-gradient(145deg,#fff5ae,#e9bd50 62%,#c99729)
+}
+
+/* 장미 설탕절임 */
+.topping-layer.rose .top-piece{
+  width:24px;height:24px;border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%,#ffd0db 0 15%,transparent 17%),
+    radial-gradient(ellipse at 50% 17%,#ec94ad 0 26%,transparent 28%),
+    radial-gradient(ellipse at 83% 50%,#dc7494 0 26%,transparent 28%),
+    radial-gradient(ellipse at 50% 83%,#d66b8b 0 26%,transparent 28%),
+    radial-gradient(ellipse at 17% 50%,#ef9cb3 0 26%,transparent 28%);
+  background-color:#f0a9bb
+}
+
+/* 슈가펄 */
+.topping-layer.pearl .top-piece{
+  width:16px;height:16px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#fff 0 18%,#fff9fc 19% 44%,#e7dce2 73%,#c9b9c2 100%);
+  box-shadow:0 1px 3px rgba(77,52,64,.16)
+}
+
+/* 버터 쿠키 */
+.topping-layer.cookie .top-piece{
+  width:23px;height:23px;border-radius:50%;
+  background:
+    radial-gradient(circle at 29% 31%,#795140 0 2px,transparent 2.5px),
+    radial-gradient(circle at 69% 38%,#795140 0 1.8px,transparent 2.3px),
+    radial-gradient(circle at 46% 73%,#795140 0 1.7px,transparent 2.2px),
+    linear-gradient(145deg,#f0cb88,#dca75e);
+  border:1px solid rgba(159,105,50,.17)
+}
+
+/* 하트 젤리 */
+.topping-layer.jelly .top-piece{
+  width:23px;height:21px;
+  clip-path:polygon(50% 94%,8% 52%,4% 34%,9% 18%,22% 8%,38% 9%,50% 23%,62% 9%,78% 8%,91% 18%,96% 34%,92% 52%);
+  background:linear-gradient(145deg,rgba(255,222,232,.98),rgba(224,91,132,.91))
+}
+
+/* 슈가 파우더 */
+.topping-layer.snow .top-piece{
+  width:22px;height:18px;
+  background:
+    radial-gradient(circle at 24% 61%,#fff 0 3px,transparent 3.5px),
+    radial-gradient(circle at 50% 31%,#fff 0 4px,transparent 4.5px),
+    radial-gradient(circle at 76% 62%,#fff 0 3px,transparent 3.5px),
+    radial-gradient(circle at 55% 78%,#f4eef2 0 2px,transparent 2.5px);
+  filter:drop-shadow(0 1px 2px rgba(93,74,83,.20))
+}
+
+/* 캔디 조각 */
+.topping-layer.candy .top-piece{
+  width:26px;height:17px;
+  clip-path:polygon(0 28%,23% 37%,29% 0,72% 0,78% 37%,100% 28%,84% 50%,100% 72%,78% 63%,72% 100%,29% 100%,23% 63%,0 72%,16% 50%);
+  background:
+    linear-gradient(90deg,transparent 0 24%,#f3a9bd 25% 75%,transparent 76%),
+    linear-gradient(135deg,var(--charA),var(--charB))
+}
+
+/* 초콜릿 조각 */
+.topping-layer.choco .top-piece{
+  width:22px;height:20px;border-radius:3px;
+  background:
+    linear-gradient(90deg,transparent 47%,rgba(255,255,255,.18) 48% 52%,transparent 53%),
+    linear-gradient(transparent 47%,rgba(255,255,255,.18) 48% 52%,transparent 53%),
+    linear-gradient(145deg,#8c5b49,#674033);
+  border:1px solid rgba(76,42,31,.18)
+}
+
+/* 민트칩 */
+.topping-layer.mintchip .top-piece{
+  width:23px;height:19px;
+  clip-path:polygon(7% 24%,37% 4%,96% 18%,80% 82%,31% 96%,3% 65%);
+  background:
+    radial-gradient(circle at 34% 35%,#4e786b 0 1.5px,transparent 1.8px),
+    radial-gradient(circle at 71% 58%,#557f72 0 1.3px,transparent 1.6px),
+    linear-gradient(145deg,#c4eadc,#7fc1ad)
+}
 .scene-decor{
   position:absolute;inset:0;pointer-events:none;z-index:3;color:var(--accent);
 }
@@ -43,7 +160,7 @@ input[type=range]{width:100%;accent-color:var(--ui)}
 </style>
 </head>
 <body>
-<header class="top"><div class="brand"><small>DEARLY</small><h1>둘의 디저트</h1><p>우리 둘을 하나의 디저트로 만든다면? ♡</p></div><div class="actions"><button id="randomAll" class="btn" type="button">🎲 전부 랜덤</button><button id="save" class="btn primary" type="button">PNG 저장</button></div></header>
+<header class="top"><div class="brand"><small>DEARLY</small><h1>우리를 담은 디저트</h1><p>우리 둘을 하나의 디저트로 만든다면? ♡</p></div><div class="actions"><button id="randomAll" class="btn" type="button">🎲 전부 랜덤</button><button id="save" class="btn primary" type="button">PNG 저장</button></div></header>
 <main class="layout">
 <aside class="editor">
 <section class="panel"><div class="ph"><h2>우리 둘</h2><span>이름과 대표색</span></div><div class="two"><div class="person"><div class="tag">A</div><label>이름<input id="nameA" type="text" value="A" maxlength="20"></label><label>대표색<input id="colorA" type="color" value="#b7d8ef"></label></div><div class="person"><div class="tag">B</div><label>이름<input id="nameB" type="text" value="B" maxlength="20"></label><label>대표색<input id="colorB" type="color" value="#f4a7c1"></label></div></div></section>
@@ -125,7 +242,8 @@ function renderTopping(){
   layer.innerHTML='';
   for(let i=0;i<count;i++){
     const span=document.createElement('span');
-    span.textContent=t.symbol;
+    span.className='top-piece';
+    span.setAttribute('aria-hidden','true');
     const offset=i-(count-1)/2;
     const x=anchor.x + offset*gap - 12;
     const y=anchor.y + Math.abs(offset)*2.2 - 12;
@@ -165,12 +283,10 @@ function setPattern(n){
   pattern=n;
   const c=$('#card'),a=themes[theme][2],m=patternMetrics();
   let p='none';
-  const tile=m.tile, s=m.size;
-  const cx=tile/2, cy=tile/2;
+  const tile=m.tile,s=m.size,cx=tile/2,cy=tile/2;
 
   if(n==='heart'){
-    const scale=s/24;
-    const tx=cx-12*scale,ty=cy-12*scale;
+    const scale=s/24,tx=cx-12*scale,ty=cy-12*scale;
     p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><g transform="translate(${tx} ${ty}) scale(${scale})"><path d="M12 22C10.8 20.7 3 16.3 3 9.8C3 6.5 5.4 4.3 8.1 4.3C9.8 4.3 11.2 5.2 12 6.4C12.8 5.2 14.2 4.3 15.9 4.3C18.6 4.3 21 6.5 21 9.8C21 16.3 13.2 20.7 12 22Z" fill="none" stroke="${a}" stroke-width="1.8"/></g></svg>`);
   }else if(n==='dot'){
     p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><circle cx="${cx}" cy="${cy}" r="${Math.max(1.2,s*.12)}" fill="${a}"/></svg>`);
@@ -178,18 +294,31 @@ function setPattern(n){
     const w=Math.max(1,s*.055);
     p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><rect x="${(tile-s)/2}" y="${(tile-s)/2}" width="${s}" height="${s}" fill="none" stroke="${a}" stroke-width="${w}"/></svg>`);
   }else if(n==='sprinkle'){
-    const len=Math.max(4,s*.28),w=Math.max(1.3,s*.07);
-    p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><g stroke="${a}" stroke-width="${w}" stroke-linecap="round"><path d="M${cx-len*.9} ${cy-len*.7}l${len} ${len*.35}"/><path d="M${cx+len*.45} ${cy-len*.8}l${-len*.3} ${len}"/><path d="M${cx-len*.3} ${cy+len*.55}l${len*.9} ${-len*.25}"/></g></svg>`);
+    const len=Math.max(4,s*.24),thick=Math.max(1.6,s*.085);
+    const pieces=[
+      [cx-s*.30,cy-s*.25,-24,.82],
+      [cx+s*.24,cy-s*.28,38,.60],
+      [cx-s*.29,cy+s*.23,31,.56],
+      [cx+s*.29,cy+s*.21,-38,.78],
+      [cx,cy,8,.44],
+      [cx+s*.02,cy-s*.43,72,.52]
+    ];
+    const shapes=pieces.map(([x,y,rot,op],i)=>{
+      const l=len*(i%2?1.12:1);
+      return `<rect x="${x-l/2}" y="${y-thick/2}" width="${l}" height="${thick}" rx="${thick/2}" fill="${a}" opacity="${op}" transform="rotate(${rot} ${x} ${y})"/>`;
+    }).join('');
+    p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}">${shapes}<circle cx="${cx-s*.04}" cy="${cy+s*.39}" r="${Math.max(1,s*.045)}" fill="${a}" opacity=".42"/></svg>`);
   }else if(n==='star'){
-    const r=s*.48,r2=s*.15;
+    const outer=s*.48,inner=s*.21;
     let pts=[];
-    for(let i=0;i<8;i++){
-      const ang=-Math.PI/2+i*Math.PI/4;
-      const rr=i%2===0?r:r2;
+    for(let i=0;i<10;i++){
+      const ang=-Math.PI/2+i*Math.PI/5;
+      const rr=i%2===0?outer:inner;
       pts.push(`${cx+Math.cos(ang)*rr},${cy+Math.sin(ang)*rr}`);
     }
-    p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><polygon points="${pts.join(' ')}" fill="none" stroke="${a}" stroke-width="${Math.max(1,s*.06)}"/></svg>`);
+    p=dataSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${tile}" viewBox="0 0 ${tile} ${tile}"><polygon points="${pts.join(' ')}" fill="none" stroke="${a}" stroke-width="${Math.max(1,s*.065)}" stroke-linejoin="round"/></svg>`);
   }
+
   c.style.setProperty('--pattern',p);
   c.style.setProperty('--pattern-tile',tile+'px');
   $$('#patterns .choice').forEach(b=>b.classList.toggle('active',b.dataset.pattern===n));
