@@ -355,15 +355,11 @@ input[type=range]{width:100%;accent-color:var(--ui)}
 }
 .scene-decor span{
   position:absolute;display:grid;place-items:center;
+  width:32px;height:32px;
   font-size:25px;line-height:1;opacity:.72;
+  transform-origin:center;
   filter:drop-shadow(0 2px 2px #6d4f5b18);
 }
-/* 장식은 디저트 위가 아니라 장면의 좌우/모서리 주변에만 배치 */
-.scene-decor span:nth-child(1){left:8%;top:25%;transform:rotate(-14deg)}
-.scene-decor span:nth-child(2){right:9%;top:20%;transform:rotate(13deg)}
-.scene-decor span:nth-child(3){left:12%;bottom:18%;transform:rotate(8deg)}
-.scene-decor span:nth-child(4){right:12%;bottom:17%;transform:rotate(-10deg)}
-.scene-decor span:nth-child(5){right:5%;top:49%;transform:rotate(18deg);font-size:18px;opacity:.52}
 /* 기존 디저트 위 장식(topper)은 사용하지 않음 */
 .dessert .topper{display:none!important}
 .oocbox{min-height:150px;line-height:1.55;background:#fdfbfc}.copyrow{display:flex;gap:8px;align-items:center}.copyrow .btn{flex:1}.charcount{min-width:64px;text-align:right;color:var(--muted);font-size:11px;font-weight:800}
@@ -389,6 +385,17 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   </div>
   <div>
     <div class="rangeRow"><label>토핑 크기<input id="toppingSize" type="range" min="70" max="150" step="5" value="100"></label><span id="toppingSizeValue" class="rangeValue">100%</span></div>
+  </div>
+</div>
+<div class="three" style="margin-top:8px">
+  <div>
+    <div class="rangeRow"><label>장식 개수<input id="decorCount" type="range" min="1" max="10" step="1" value="5"></label><span id="decorCountValue" class="rangeValue">5개</span></div>
+  </div>
+  <div>
+    <div class="rangeRow"><label>장식 간격<input id="decorGap" type="range" min="20" max="70" step="1" value="42"></label><span id="decorGapValue" class="rangeValue">42</span></div>
+  </div>
+  <div>
+    <div class="rangeRow"><label>장식 크기<input id="decorSize" type="range" min="60" max="180" step="5" value="100"></label><span id="decorSizeValue" class="rangeValue">100%</span></div>
   </div>
 </div>
 <label>가격 표시<select id="price"><option value="PRICE : KISS ♡">PRICE : KISS ♡</option><option value="₩ LOVE">₩ LOVE</option><option value="♡ 99">♡ 99</option><option value="FOR US ONLY">FOR US ONLY</option></select></label>
@@ -515,8 +522,41 @@ function renderTopping(){
 function renderDecor(){
   const d=get(decors,$('#decor').value),box=$('#sceneDecor');
   if(!box)return;
-  if(d.id==='none'){box.innerHTML='';return}
-  box.innerHTML=Array.from({length:5},()=>`<span>${d.symbol}</span>`).join('');
+
+  const count=Math.max(1,Math.min(10,Number($('#decorCount').value)||5));
+  const gap=Math.max(20,Math.min(70,Number($('#decorGap').value)||42));
+  const size=Math.max(60,Math.min(180,Number($('#decorSize').value)||100));
+
+  $('#decorCountValue').textContent=count+'개';
+  $('#decorGapValue').textContent=String(gap);
+  $('#decorSizeValue').textContent=size+'%';
+
+  if(d.id==='none'){
+    box.innerHTML='';
+    return;
+  }
+
+  box.innerHTML='';
+  const rx=34+(gap-20)*0.24;
+  const ry=27+(gap-20)*0.16;
+
+  for(let i=0;i<count;i++){
+    const span=document.createElement('span');
+    span.textContent=d.symbol;
+
+    const angle=(-90+(360/count)*i)*Math.PI/180;
+    const x=50+Math.cos(angle)*rx;
+    const y=50+Math.sin(angle)*ry;
+    const rot=-16+(i%5)*8;
+
+    span.style.left=`calc(${x}% - 16px)`;
+    span.style.top=`calc(${y}% - 16px)`;
+    span.style.fontSize=`${25*(size/100)}px`;
+    span.style.transform=`rotate(${rot}deg)`;
+    span.style.opacity=String(0.58+(i%3)*0.08);
+
+    box.appendChild(span);
+  }
 }
 function makeOoc(){
   const a=($('#nameA').value||'캐릭터 A').trim(),b=($('#nameB').value||'캐릭터 B').trim();
@@ -596,7 +636,7 @@ function applyFont(){const m={default:'Arial,"Apple SD Gothic Neo","Malgun Gothi
 function fit(){const c=$('#card'),s=$('.stage');if(innerWidth>600){c.style.transform='';c.style.marginBottom='';return}const sc=Math.min(1,(s.clientWidth-4)/760);c.style.transform=`scale(${sc})`;c.style.marginBottom=`-${c.offsetHeight*(1-sc)}px`}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1800)}
 async function save(){if(typeof html2canvas!=='function'){toast('PNG 저장 모듈을 불러오지 못했어요.');return}const c=$('#card'),b=$('#save'),ot=c.style.transform,om=c.style.marginBottom,txt=b.textContent;b.disabled=true;b.textContent='PNG 만드는 중…';c.style.transform='none';c.style.marginBottom='0';document.body.classList.add('exporting');try{await document.fonts.ready;const w=Number($('#exportWidth').value||1080),canvas=await html2canvas(c,{scale:w/c.offsetWidth,useCORS:true,backgroundColor:null,logging:false}),blob=await new Promise((ok,no)=>canvas.toBlob(x=>x?ok(x):no(new Error('blob')),'image/png')),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`${($('#nameA').value||'A')}-${($('#nameB').value||'B')}-sweet-as-us.png`.replace(/[\\/:*?"<>|]/g,'_');document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000);toast('PNG로 저장했어요 ♡')}catch(e){console.error(e);toast('PNG 저장에 실패했어요.')}finally{document.body.classList.remove('exporting');c.style.transform=ot;c.style.marginBottom=om;b.disabled=false;b.textContent=txt;setTimeout(fit,0)}}
-['nameA','nameB','colorA','colorB','type','flavorA','flavorB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap','toppingSize'].forEach(id=>$('#'+id).addEventListener('input',update));
+['nameA','nameB','colorA','colorB','type','flavorA','flavorB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap','toppingSize','decorCount','decorGap','decorSize'].forEach(id=>$('#'+id).addEventListener('input',update));
 ['patternSize','patternGap'].forEach(id=>$('#'+id).addEventListener('input',()=>setPattern(pattern)));$('#randomAll').onclick=()=>randomize(true);$('#reroll').onclick=()=>randomize(false);$('#save').onclick=save;$('#fit').onclick=fit;$('#themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});$('#patterns').addEventListener('click',e=>{const b=e.target.closest('[data-pattern]');if(b)setPattern(b.dataset.pattern)});$('#font').onchange=applyFont;$('#fontFile').onchange=e=>loadFont(e.target.files?.[0]);$('#copyOoc').onclick=copyOoc;addEventListener('resize',fit);$('#menuName').value='Snowberry Pair Cake';$('#menuDesc').value='바닐라 밀크와 딸기 크림을 함께 담고 베리 믹스를 얹었습니다. 서로 다른 온도가 만나 하나의 부드러운 조합이 되었습니다.';setTheme('milk');setPattern('none');update();setTimeout(fit,30);
 </script>
 </body></html>
