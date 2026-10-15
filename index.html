@@ -19,21 +19,21 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   left:50%;bottom:16px;transform:translateX(-50%);
   width:286px;height:38px;border-radius:50%;
   background:radial-gradient(ellipse at center,#ffffff 0 46%,#f4edf1 47% 72%,#eadfe5 73% 100%);
-  border:3px solid rgba(255,255,255,.98);
-  box-shadow:0 10px 14px rgba(79,56,68,.13), inset 0 2px 0 rgba(255,255,255,.92);
+  border:3px solid #fff;
+  box-shadow:0 10px 16px rgba(79,56,68,.16), inset 0 2px 0 rgba(255,255,255,.98);
 }
 .plate:before{
   content:"";position:absolute;inset:6px 24px 8px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.88);
-  opacity:.88;
+  border:2px solid rgba(255,255,255,.96);
+  opacity:.96;
 }
 
 .cake .base{
   left:68px;bottom:43px;width:194px;height:134px;border-radius:18px 18px 24px 24px;
   background:
     linear-gradient(to bottom,#fff9fc 0 12%,var(--flA) 12% 39%,#fff8fb 39% 47%,var(--flB) 47% 74%,#fff8fb 74% 82%,var(--flA) 82% 100%);
-  border:3px solid #fff;
-  box-shadow:inset -8px 0 0 rgba(124,84,101,.06), 0 8px 16px rgba(80,52,65,.10);
+  border:4px solid #fff;
+  box-shadow:inset -8px 0 0 rgba(124,84,101,.07), 0 8px 16px rgba(80,52,65,.12);
 }
 .cake .base:before{
   content:"";position:absolute;left:10px;right:10px;top:8px;height:18px;border-radius:999px;
@@ -48,8 +48,8 @@ input[type=range]{width:100%;accent-color:var(--ui)}
   left:70px;bottom:166px;width:190px;height:36px;
   border-radius:52% 52% 42% 42% / 70% 70% 36% 36%;
   background:linear-gradient(to bottom,#ffffff 0 36%,#fff8fb 37% 72%,#f2e5ec 100%);
-  border:2px solid #fff;
-  box-shadow:0 5px 10px rgba(90,59,73,.08);
+  border:3px solid #fff;
+  box-shadow:0 5px 10px rgba(90,59,73,.10);
   z-index:2;
 }
 .cake .cream:before{display:none;}
@@ -850,6 +850,8 @@ async function save(){
       useCORS:true,
       allowTaint:false,
       backgroundColor:getComputedStyle(c).backgroundColor||'#ffffff',
+      foreignObjectRendering:true,
+      removeContainer:true,
       logging:false,
       onclone:clonedDoc=>{
         // 프리뷰의 실제 CSS를 그대로 사용한다. export 전용 케이크 보정은 넣지 않는다.
