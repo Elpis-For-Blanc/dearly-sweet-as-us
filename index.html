@@ -407,7 +407,16 @@ body.exporting .scene-decor span{cursor:default}
 <label>가격 표시<select id="price"><option value="PRICE : KISS ♡">PRICE : KISS ♡</option><option value="₩ LOVE">₩ LOVE</option><option value="♡ 99">♡ 99</option><option value="FOR US ONLY">FOR US ONLY</option></select></label>
 <button id="reroll" class="btn primary" type="button" style="width:100%">잠금 제외하고 다시 만들기</button></section>
 <section class="panel"><div class="ph"><h2>메뉴 문구</h2><span>자동 생성 후 수정 가능</span></div><label>이름<input id="menuName" type="text"></label><label>설명<textarea id="menuDesc" rows="3"></textarea></label></section>
-<section class="panel"><div class="ph"><h2>꾸미기</h2><span>카드 테마</span></div><div id="themes" class="themeGrid"><button class="choice active" data-theme="milk" type="button">딸기우유</button><button class="choice" data-theme="cream" type="button">크림카페</button><button class="choice" data-theme="choco" type="button">쇼콜라</button><button class="choice" data-theme="lav" type="button">라벤더</button><button class="choice" data-theme="mint" type="button">민트</button><button class="choice" data-theme="vintage" type="button">빈티지</button></div><div class="ph" style="margin-top:14px"><h2>배경 무늬</h2><span>카드 배경</span></div><div id="patterns" class="patternGrid"><button class="choice active" data-pattern="none" type="button">없음</button><button class="choice" data-pattern="heart" type="button">♡ 하트</button><button class="choice" data-pattern="dot" type="button">· 도트</button><button class="choice" data-pattern="check" type="button">▦ 체크</button><button class="choice" data-pattern="sprinkle" type="button">✦ 스프링클</button><button class="choice" data-pattern="star" type="button">☆ 별빛</button></div>
+<section class="panel"><div class="ph"><h2>꾸미기</h2><span>카드 테마</span></div><div id="themes" class="themeGrid"><button class="choice active" data-theme="milk" type="button">딸기우유</button><button class="choice" data-theme="cream" type="button">크림카페</button><button class="choice" data-theme="choco" type="button">쇼콜라</button><button class="choice" data-theme="lav" type="button">라벤더</button><button class="choice" data-theme="mint" type="button">민트</button><button class="choice" data-theme="vintage" type="button">빈티지</button></div>
+<div class="ph" style="margin-top:14px"><h2>색상 직접 지정</h2><span>테마와 별개로 덮어쓰기</span></div>
+<div class="two">
+  <label>카드 배경색<input id="customBg" type="color" value="#f7dce7"></label>
+  <label>무늬 색상<input id="customPatternColor" type="color" value="#d96f9e"></label>
+</div>
+<div class="two">
+  <button id="applyCustomColors" class="btn" type="button">직접 색상 적용</button>
+  <button id="resetCustomColors" class="btn" type="button">테마 색상으로 되돌리기</button>
+</div><div class="ph" style="margin-top:14px"><h2>배경 무늬</h2><span>카드 배경</span></div><div id="patterns" class="patternGrid"><button class="choice active" data-pattern="none" type="button">없음</button><button class="choice" data-pattern="heart" type="button">♡ 하트</button><button class="choice" data-pattern="dot" type="button">· 도트</button><button class="choice" data-pattern="check" type="button">▦ 체크</button><button class="choice" data-pattern="sprinkle" type="button">✦ 스프링클</button><button class="choice" data-pattern="star" type="button">☆ 별빛</button></div>
 <div class="two" style="margin-top:12px">
   <div class="rangeRow"><label>무늬 크기<input id="patternSize" type="range" min="8" max="34" step="1" value="18"></label><span id="patternSizeValue" class="rangeValue">18</span></div>
   <div class="rangeRow"><label>무늬 간격<input id="patternGap" type="range" min="2" max="34" step="1" value="14"></label><span id="patternGapValue" class="rangeValue">14</span></div>
@@ -501,7 +510,7 @@ const decors=[
 const dessertNames={cake:'Cake',parfait:'Parfait',macaron:'Macaron Set',sundae:'Sundae',crepe:'Crêpe'};
 const themes={milk:['#f7dce7','#fffafd','#d96f9e','#573f49'],cream:['#f3ead7','#fffdf7','#b18a55','#5a4935'],choco:['#dcc5b6','#fff9f5','#8a6253','#4f3b34'],lav:['#e7def5','#fcfaff','#8b6db4','#4e435b'],mint:['#dff1e8','#fbfffd','#5f9f8a','#3f5a51'],vintage:['#eee0bf','#fffaf0','#9f7951','#5a4733']};
 const themeWraps={milk:['#fff6fb','#f1e1ea','#deccd7'],cream:['#fff9ef','#efe0c8','#dbc59f'],choco:['#f8ece7','#e6d3cc','#cfb0a6'],lav:['#fbf6ff','#ece4fb','#d8caee'],mint:['#f2fff8','#dceee4','#bddccf'],vintage:['#fff6e7','#ecdcc0','#d6c19d']};
-const locks={type:false,a:false,b:false,mood:false,top:false,decor:false};let theme='milk',pattern='none';
+const locks={type:false,a:false,b:false,mood:false,top:false,decor:false};let theme='milk',pattern='none',customBgEnabled=false,customPatternEnabled=false;
 function fill(el,data){el.innerHTML=data.map(x=>`<option value="${x.id}">${x.name}</option>`).join('')}fill($('#flavorA'),flavors);fill($('#flavorB'),flavors);fill($('#mood'),moods);fill($('#topping'),toppings);fill($('#decor'),decors);$('#decor').value='none';$('#flavorA').value='vanilla';$('#flavorB').value='strawberry';
 const get=(a,id)=>a.find(x=>x.id===id)||a[0],rnd=a=>a[Math.floor(Math.random()*a.length)];
 function toppingAnchor(type){
@@ -635,7 +644,24 @@ function update(){const a=get(flavors,$('#flavorA').value),b=get(flavors,$('#fla
 function textgen(){$('#menuName').value=makeName();$('#menuDesc').value=makeDesc();update()}
 function randomize(all=false){if(all||!locks.type)$('#type').value=rnd([...$('#type').options]).value;if(all||!locks.a)$('#flavorA').value=rnd(flavors).id;if(all||!locks.b)$('#flavorB').value=rnd(flavors.filter(x=>x.id!==$('#flavorA').value)).id;if(all||!locks.mood)$('#mood').value=rnd(moods).id;if(all||!locks.top)$('#topping').value=rnd(toppings).id;if(all||!locks.decor)$('#decor').value=rnd(decors).id;textgen()}
 function lock(btn,key){btn.addEventListener('click',()=>{locks[key]=!locks[key];btn.classList.toggle('on',locks[key]);btn.textContent=locks[key]?'🔒':'🔓'})}lock($('#lockType'),'type');lock($('#lockA'),'a');lock($('#lockB'),'b');lock($('#lockMood'),'mood');lock($('#lockTop'),'top');lock($('#lockDecor'),'decor');
-function setTheme(n){theme=n;const t=themes[n];const w=themeWraps[n]||themeWraps.milk;const c=$('#card');c.style.setProperty('--bg',t[0]);c.style.setProperty('--paper',t[1]);c.style.setProperty('--accent',t[2]);c.style.setProperty('--text',t[3]);c.style.setProperty('--wrap1',w[0]);c.style.setProperty('--wrap2',w[1]);c.style.setProperty('--wrap3',w[2]);$$('#themes .choice').forEach(b=>b.classList.toggle('active',b.dataset.theme===n));setPattern(pattern);setCrepePattern($('#crepePattern').value)}
+function setTheme(n){
+  theme=n;
+  const t=themes[n],w=themeWraps[n]||themeWraps.milk,c=$('#card');
+  if(!customBgEnabled){
+    c.style.setProperty('--bg',t[0]);
+    $('#customBg').value=t[0];
+  }
+  c.style.setProperty('--paper',t[1]);
+  c.style.setProperty('--accent',t[2]);
+  c.style.setProperty('--text',t[3]);
+  c.style.setProperty('--wrap1',w[0]);
+  c.style.setProperty('--wrap2',w[1]);
+  c.style.setProperty('--wrap3',w[2]);
+  if(!customPatternEnabled)$('#customPatternColor').value=t[2];
+  $$('#themes .choice').forEach(b=>b.classList.toggle('active',b.dataset.theme===n));
+  setPattern(pattern);
+  setCrepePattern($('#crepePattern').value);
+}
 function dataSvg(s){return `url("data:image/svg+xml,${encodeURIComponent(s)}")`}
 function patternMetrics(){
   const size=Math.max(8,Math.min(34,Number($('#patternSize').value)||18));
@@ -646,7 +672,7 @@ function patternMetrics(){
 }
 function setPattern(n){
   pattern=n;
-  const c=$('#card'),a=themes[theme][2],m=patternMetrics();
+  const c=$('#card'),a=customPatternEnabled?$('#customPatternColor').value:themes[theme][2],m=patternMetrics();
   let p='none';
   const tile=m.tile,s=m.size,cx=tile/2,cy=tile/2;
 
@@ -689,7 +715,7 @@ function setPattern(n){
   $$('#patterns .choice').forEach(b=>b.classList.toggle('active',b.dataset.pattern===n));
 }
 function setCrepePattern(n){
-  const c=$('#card'),a=themes[theme][2];
+  const c=$('#card'),a=customPatternEnabled?$('#customPatternColor').value:themes[theme][2];
   let p='none',tile='26px 26px';
 
   if(n==='stripe'){
@@ -711,6 +737,26 @@ function setCrepePattern(n){
 
   c.style.setProperty('--crepePattern',p);
   c.style.setProperty('--crepePatternTile',tile);
+}
+function applyCustomColors(){
+  customBgEnabled=true;
+  customPatternEnabled=true;
+  const c=$('#card');
+  c.style.setProperty('--bg',$('#customBg').value);
+  setPattern(pattern);
+  setCrepePattern($('#crepePattern').value);
+  toast('배경색과 무늬 색상을 적용했어요 ♡');
+}
+function resetCustomColors(){
+  customBgEnabled=false;
+  customPatternEnabled=false;
+  const t=themes[theme],c=$('#card');
+  $('#customBg').value=t[0];
+  $('#customPatternColor').value=t[2];
+  c.style.setProperty('--bg',t[0]);
+  setPattern(pattern);
+  setCrepePattern($('#crepePattern').value);
+  toast('테마 기본 색상으로 돌아왔어요.');
 }
 function applyFont(){const m={
 default:'Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif',
@@ -849,6 +895,10 @@ async function save(){
   }
 }
 ['nameA','nameB','colorA','colorB','type','flavorA','flavorB','flavorReasonA','flavorReasonB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap','toppingSize','decorCount','decorSize','crepePattern'].forEach(id=>$('#'+id).addEventListener('input',update));
-['patternSize','patternGap'].forEach(id=>$('#'+id).addEventListener('input',()=>setPattern(pattern)));$('#randomAll').onclick=()=>randomize(true);$('#reroll').onclick=()=>randomize(false);$('#save').onclick=save;$('#fit').onclick=fit;$('#themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});$('#patterns').addEventListener('click',e=>{const b=e.target.closest('[data-pattern]');if(b)setPattern(b.dataset.pattern)});$('#font').onchange=applyFont;$('#fontFile').onchange=e=>loadFont(e.target.files?.[0]);$('#copyOoc').onclick=copyOoc;addEventListener('resize',fit);$('#menuName').value='Snowberry Pair Cake';$('#menuDesc').value='바닐라 밀크와 딸기 크림을 함께 담고 베리 믹스를 얹었습니다. 서로 다른 온도가 만나 하나의 부드러운 조합이 되었습니다.';setTheme('milk');setPattern('none');update();setTimeout(fit,30);
+['patternSize','patternGap'].forEach(id=>$('#'+id).addEventListener('input',()=>setPattern(pattern)));$('#randomAll').onclick=()=>randomize(true);$('#reroll').onclick=()=>randomize(false);$('#save').onclick=save;$('#fit').onclick=fit;$('#themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});$('#patterns').addEventListener('click',e=>{const b=e.target.closest('[data-pattern]');if(b)setPattern(b.dataset.pattern)});
+$('#customBg').addEventListener('input',()=>{customBgEnabled=true;$('#card').style.setProperty('--bg',$('#customBg').value)});
+$('#customPatternColor').addEventListener('input',()=>{customPatternEnabled=true;setPattern(pattern);setCrepePattern($('#crepePattern').value)});
+$('#applyCustomColors').onclick=applyCustomColors;
+$('#resetCustomColors').onclick=resetCustomColors;$('#font').onchange=applyFont;$('#fontFile').onchange=e=>loadFont(e.target.files?.[0]);$('#copyOoc').onclick=copyOoc;addEventListener('resize',fit);$('#menuName').value='Snowberry Pair Cake';$('#menuDesc').value='바닐라 밀크와 딸기 크림을 함께 담고 베리 믹스를 얹었습니다. 서로 다른 온도가 만나 하나의 부드러운 조합이 되었습니다.';setTheme('milk');setPattern('none');update();setTimeout(fit,30);
 </script>
 </body></html>
