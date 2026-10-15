@@ -725,10 +725,129 @@ serif:'"Times New Roman","Batang",serif',
 round:'"Arial Rounded MT Bold","Apple SD Gothic Neo",sans-serif',
 hand:'"Comic Sans MS","Apple SD Gothic Neo",cursive',
 custom:'"UserDessertFont",Arial,sans-serif'
-};$('#card').style.setProperty('--font',m[$('#font').value]||m.default)}async function loadFont(f){if(!f)return;try{const face=new FontFace('UserDessertFont',await f.arrayBuffer());await face.load();document.fonts.add(face);$('#font').value='custom';applyFont();toast('폰트를 적용했어요.')}catch(e){toast('폰트를 불러오지 못했어요.')}}
+};$('#card').style.setProperty('--font',m[$('#font').value]||m.default)}async function loadFont(f){
+  if(!f)return;
+  try{
+    const dataUrl=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=()=>resolve(reader.result);
+      reader.onerror=()=>reject(reader.error);
+      reader.readAsDataURL(f);
+    });
+
+    let style=document.getElementById('userDessertFontStyle');
+    if(!style){
+      style=document.createElement('style');
+      style.id='userDessertFontStyle';
+      document.head.appendChild(style);
+    }
+    style.textContent=`@font-face{font-family:"UserDessertFont";src:url("${dataUrl}");font-style:normal;font-weight:100 900;font-display:block;}`;
+
+    try{
+      const face=new FontFace('UserDessertFont',`url("${dataUrl}")`);
+      await face.load();
+      document.fonts.add(face);
+    }catch(_){}
+
+    await document.fonts.load('16px "UserDessertFont"');
+    await document.fonts.ready;
+    $('#font').value='custom';
+    applyFont();
+    update();
+    toast('폰트를 적용했어요.');
+  }catch(e){
+    console.error(e);
+    toast('폰트를 불러오지 못했어요.');
+  }
+}
 function fit(){const c=$('#card'),s=$('.stage');if(innerWidth>600){c.style.transform='';c.style.marginBottom='';return}const sc=Math.min(1,(s.clientWidth-4)/760);c.style.transform=`scale(${sc})`;c.style.marginBottom=`-${c.offsetHeight*(1-sc)}px`}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1800)}
-async function save(){if(typeof html2canvas!=='function'){toast('PNG 저장 모듈을 불러오지 못했어요.');return}const c=$('#card'),b=$('#save'),ot=c.style.transform,om=c.style.marginBottom,txt=b.textContent;b.disabled=true;b.textContent='PNG 만드는 중…';c.style.transform='none';c.style.marginBottom='0';document.body.classList.add('exporting');try{await document.fonts.ready;const w=Number($('#exportWidth').value||1080),canvas=await html2canvas(c,{scale:w/c.offsetWidth,useCORS:true,backgroundColor:null,logging:false}),blob=await new Promise((ok,no)=>canvas.toBlob(x=>x?ok(x):no(new Error('blob')),'image/png')),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`${($('#nameA').value||'A')}-${($('#nameB').value||'B')}-sweet-as-us.png`.replace(/[\\/:*?"<>|]/g,'_');document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000);toast('PNG로 저장했어요 ♡')}catch(e){console.error(e);toast('PNG 저장에 실패했어요.')}finally{document.body.classList.remove('exporting');c.style.transform=ot;c.style.marginBottom=om;b.disabled=false;b.textContent=txt;setTimeout(fit,0)}}
+async function save(){
+  if(typeof html2canvas!=='function'){
+    toast('PNG 저장 모듈을 불러오지 못했어요.');
+    return;
+  }
+
+  const c=$('#card'),b=$('#save');
+  const ot=c.style.transform,om=c.style.marginBottom,txt=b.textContent;
+  b.disabled=true;
+  b.textContent='PNG 만드는 중…';
+
+  c.style.transform='none';
+  c.style.marginBottom='0';
+  document.body.classList.add('exporting');
+
+  try{
+    await document.fonts.ready;
+    if($('#font').value==='custom'){
+      await document.fonts.load('16px "UserDessertFont"');
+    }
+
+    // transform 제거 후 레이아웃/줄바꿈이 완전히 확정될 시간을 줌
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+    const rect=c.getBoundingClientRect();
+    const captureWidth=Math.ceil(rect.width);
+    const captureHeight=Math.ceil(c.scrollHeight);
+    const targetWidth=Number($('#exportWidth').value||1080);
+    const scale=targetWidth/captureWidth;
+
+    const canvas=await html2canvas(c,{
+      scale,
+      width:captureWidth,
+      height:captureHeight,
+      windowWidth:Math.max(document.documentElement.clientWidth,1200),
+      windowHeight:Math.max(document.documentElement.clientHeight,captureHeight+200),
+      scrollX:0,
+      scrollY:-window.scrollY,
+      useCORS:true,
+      allowTaint:false,
+      backgroundColor:null,
+      logging:false,
+      onclone:clonedDoc=>{
+        // 업로드 폰트의 data URL @font-face가 clone에도 반드시 존재하게 함
+        const sourceStyle=document.getElementById('userDessertFontStyle');
+        if(sourceStyle&&!clonedDoc.getElementById('userDessertFontStyle')){
+          const copied=clonedDoc.createElement('style');
+          copied.id='userDessertFontStyle';
+          copied.textContent=sourceStyle.textContent;
+          clonedDoc.head.appendChild(copied);
+        }
+
+        const clonedCard=clonedDoc.getElementById('card');
+        if(clonedCard){
+          clonedCard.style.transform='none';
+          clonedCard.style.marginBottom='0';
+          clonedCard.style.width=captureWidth+'px';
+          clonedCard.style.height='auto';
+          clonedCard.style.minHeight='0';
+        }
+      }
+    });
+
+    const blob=await new Promise((ok,no)=>
+      canvas.toBlob(x=>x?ok(x):no(new Error('blob')),'image/png')
+    );
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;
+    a.download=`${($('#nameA').value||'A')}-${($('#nameB').value||'B')}-sweet-as-us.png`.replace(/[\\/:*?"<>|]/g,'_');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),15000);
+    toast('프리뷰와 같은 모습으로 PNG를 저장했어요 ♡');
+  }catch(e){
+    console.error(e);
+    toast('PNG 저장에 실패했어요.');
+  }finally{
+    document.body.classList.remove('exporting');
+    c.style.transform=ot;
+    c.style.marginBottom=om;
+    b.disabled=false;
+    b.textContent=txt;
+    setTimeout(fit,0);
+  }
+}
 ['nameA','nameB','colorA','colorB','type','flavorA','flavorB','flavorReasonA','flavorReasonB','mood','topping','decor','price','menuName','menuDesc','toppingCount','toppingGap','toppingSize','decorCount','decorSize','crepePattern'].forEach(id=>$('#'+id).addEventListener('input',update));
 ['patternSize','patternGap'].forEach(id=>$('#'+id).addEventListener('input',()=>setPattern(pattern)));$('#randomAll').onclick=()=>randomize(true);$('#reroll').onclick=()=>randomize(false);$('#save').onclick=save;$('#fit').onclick=fit;$('#themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});$('#patterns').addEventListener('click',e=>{const b=e.target.closest('[data-pattern]');if(b)setPattern(b.dataset.pattern)});$('#font').onchange=applyFont;$('#fontFile').onchange=e=>loadFont(e.target.files?.[0]);$('#copyOoc').onclick=copyOoc;addEventListener('resize',fit);$('#menuName').value='Snowberry Pair Cake';$('#menuDesc').value='바닐라 밀크와 딸기 크림을 함께 담고 베리 믹스를 얹었습니다. 서로 다른 온도가 만나 하나의 부드러운 조합이 되었습니다.';setTheme('milk');setPattern('none');update();setTimeout(fit,30);
 </script>
